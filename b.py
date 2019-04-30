@@ -11,3 +11,4 @@ def solution(budgets, M):
     return dLine
 
 print(solution([225,280,300,250],1000))
+print("aaaaa")
