@@ -43,9 +43,29 @@ class Binary_search_tree:
       return self.check(node.get_right(), key)
   
   def insert(self, node):
+    if self.root is None:
+      self.root = node
+    else:
+      self.insert_node(self.root, node)
 
   def insert_node(self, parent, node):
+    if parent.get_key == node.get_key():
+      pass
+    else:
+      if parent.get_key() > node.get_key():
+        left = parent.get_left()
+        if left is None:
+          parent.set_left(node)
+        else:
+          self.insert_node(parent.get_left(),node)
+      elif parent.get_key() < node.get_key():
+        right = parent.get_right()
+        if right is None:
+          parent.set_right(node)
+        else:
+          self.insert_node(parent.get_right(),node)
 
+      
 bst = Binary_search_tree()
 node_40 = Node(40)
 bst.insert(node_40)
