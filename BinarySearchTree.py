@@ -57,13 +57,24 @@ class Binary_search_tree:
         if left is None:
           parent.set_left(node)
         else:
-          self.insert_node(parent.get_left(),node)
-      elif parent.get_key() < node.get_key():
+          self.insert_node(left,node)
+      else:
         right = parent.get_right()
         if right is None:
           parent.set_right(node)
         else:
-          self.insert_node(parent.get_right(),node)
+          self.insert_node(right,node)
+
+  def print_tree(self):
+    self.print_node(self.root, 0)
+  def print_node(self,node, depth):
+    if node is not None:
+      print("  "*depth + str(node.get_key()))
+
+      self.print_node(node.get_left(), depth+1)
+      self.print_node(node.get_right(), depth+1)
+
+
 
       
 bst = Binary_search_tree()
@@ -109,3 +120,5 @@ if result is None:
   print("fail")
 else:
   print("success")
+
+bst.print_tree()
