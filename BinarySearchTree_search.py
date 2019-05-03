@@ -39,6 +39,7 @@ class Binary_search_tree:
             return self.check(node.get_right(), key)
         else:
             return self.check(node.get_left(), key)
+            
 node_40 = Node(40)
 node_15 = Node(15)
 node_69 = Node(69)
