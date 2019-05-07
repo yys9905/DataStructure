@@ -120,14 +120,22 @@ class Binary_search_tree:
   def twoChildDelete(self, parent, node, locate):
     leftSubtree = node.get_left()
     rightSubtree = node.get_right()
-    orderResultParent, orderResult = self.in_order(node.get_right())
+    orderResultParent = None
+
+    if node.get_right().get_left() == None:
+      orderResult = node.get_right()
+    else:
+      orderResultParent, orderResult = self.in_order(node.get_right())
+
     if locate == 0:
       parent.set_left(orderResult)
     else:
       parent.set_right(orderResult)
-    orderResultParent.set_left(None)
+    if orderResultParent:
+      orderResultParent.set_left(None)
+      orderResult.set_right(rightSubtree)
     orderResult.set_left(leftSubtree)
-    orderResult.set_right(rightSubtree)
+
 
   def oneChildDelete(self, parent, node, locate):
     if node.get_left():
@@ -192,8 +200,6 @@ if result is None:
 else:
   print("success")
 
-bst.delete(15)
-bst.delete(66)
-bst.delete(90)
-
+bst.print_tree()
+bst.delete(86)
 bst.print_tree()
