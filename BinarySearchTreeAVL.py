@@ -4,7 +4,7 @@ class Node:
     self.key = key
     self.left = None
     self.right = None
-    
+    self.height = 0
   def set_left(self, left):
     self.left = left
     
@@ -20,7 +20,10 @@ class Node:
   def get_key(self):
     return self.key
   
-class Binary_search_tree:
+  def set_height(self, height):
+    self.height = height
+  
+class AVL:
   
   def __init__(self):
     self.root = None
@@ -109,7 +112,7 @@ class Binary_search_tree:
     else:
       self.oneChildDelete(parent, node, locate)
 
-  def in_order(self, parent):
+  def find_successor(self, parent):
     node = parent.get_left()
     child = node.get_left()
     if child is not None:
@@ -150,34 +153,57 @@ class Binary_search_tree:
         parent.set_right(node.get_right())
 
   def noneChildDelete(self, parent, node, locate):
-      if locate == 0:
-        parent.set_left(None)
-      else:
-        parent.set_right(None)
+    if locate == 0:
+      parent.set_left(None)
+    else:
+      parent.set_right(None)
 
-bst = Binary_search_tree()
+  def rocateRight(self):
+    temp = self.root.get_left().get_right()
+    self.root.get_left().set_right(self.root)
+    self.root = self.root.get_left()
+    self.root.get_right().set_left(temp)
+
+  def rocateleft(self):
+    temp = self.root.get_right().get_left()
+    self.root.get_right().set_left(self.root)
+    self.root = self.root.get_right()
+    self.root.get_left().set_right(temp)
+
+  def calHeight(self, node): 
+    if node is None: 
+      return 0 ;  
+  
+    else :
+      lDepth = self.calHeight(node.left) 
+      rDepth = self.calHeight(node.right)
+      print(node.key)
+      print(lDepth)
+      print(rDepth)
+      # if (lDepth - rDepth) >= 2:
+      #   self.rocateRight()
+      # elif (lDepth - rdepth) <= -2:
+      #   self.rocateleft()
+
+      if (lDepth > rDepth): 
+          return lDepth+1
+      else: 
+          return rDepth+1
+
+
+  # def checkValence(self):
+
+bst = AVL()
 node_40 = Node(40)
 bst.insert(node_40)
 node_15 = Node(15)
 bst.insert(node_15)
 node_69 = Node(69)
 bst.insert(node_69)
-node_8 = Node(8)
-bst.insert(node_8)
-node_25 = Node(25)
-bst.insert(node_25)
 node_54 = Node(54)
 bst.insert(node_54)
 node_86 = Node(86)
 bst.insert(node_86)
-node_5 = Node(5)
-bst.insert(node_5)
-node_10 = Node(10)
-bst.insert(node_10)
-node_20 = Node(20)
-bst.insert(node_20)
-node_30 = Node(30)
-bst.insert(node_30)
 node_50 = Node(50)
 bst.insert(node_50)
 node_66 = Node(66)
@@ -200,6 +226,5 @@ if result is None:
 else:
   print("success")
 
-bst.print_tree()
-bst.delete(86)
-bst.print_tree()
+print(bst.calHeight(node_40))
+# bst.print_tree()
