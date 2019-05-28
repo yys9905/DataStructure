@@ -1,6 +1,6 @@
 def find(L, target, start, end):
-    if start > end:
-        return -1
+    # if start > end:
+    #     return -1
     midNum =(start + end) // 2
     if L[midNum] == target:
         return midNum
